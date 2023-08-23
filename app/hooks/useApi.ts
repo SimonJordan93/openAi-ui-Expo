@@ -114,8 +114,8 @@ export const useApi = () => {
     const formData = new FormData();
     const imageData = {
       uri: audioUri,
-      type: "audio/wav",
-      name: "audio.wav",
+      type: "audio/x-m4a",
+      name: "audio.m4a",
     };
 
     formData.append("file", imageData as unknown as Blob);

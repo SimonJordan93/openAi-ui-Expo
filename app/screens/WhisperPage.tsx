@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import React, { useState } from "react";
 import { Audio } from "expo-av";
 import { useApi } from "../hooks/useApi";
@@ -32,13 +38,13 @@ const WhisperPage = () => {
       allowsRecordingIOS: false,
     });
     const uri = recording?.getURI();
-    console.log(uri);
+    // console.log(uri);
     uploadAudio();
   };
 
   const uploadAudio = async () => {
     const uri = recording?.getURI();
-    console.log(uri);
+    // console.log(uri);
 
     if (!uri) {
       return;
@@ -52,7 +58,7 @@ const WhisperPage = () => {
     } catch (error) {
       console.log(error);
     }
-    setLoading(true);
+    setLoading(false);
   };
 
   return (
@@ -75,6 +81,9 @@ const WhisperPage = () => {
           <Text style={styles.buttonText}>Stop recording</Text>
         </TouchableOpacity>
       )}
+
+      {loading && <ActivityIndicator style={{ marginTop: 10 }} size="large" />}
+      {result && <Text style={styles.text}>{result}</Text>}
     </View>
   );
 };
